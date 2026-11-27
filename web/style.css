@@ -125,3 +125,9 @@ dialog::backdrop { background: rgb(0 0 0 / .45); }
 .close { align-self: flex-end; border: 0; border-radius: 99px; padding: 8px 16px; background: var(--surface); font-weight: 800; cursor: pointer; }
 .credits-list .panel { margin-bottom: 8px; }
 @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+
+/* quiz: all choices on one screen */
+.fitgrid { display: grid; gap: 8px; justify-content: center; }
+.fitgrid .tile { padding: 2px 2px 5px; border-radius: 16px; }
+.fitgrid .tile .name b { font-size: .74rem; }
+.fitgrid .tile .mark { font-size: 1.6rem; }

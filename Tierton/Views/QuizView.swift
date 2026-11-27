@@ -1,38 +1,25 @@
 import SwiftUI
 
-/// Quiz: a sound plays, and ALL animals of the selection are on offer – sorted by habitat like in
-/// "Entdecken", so you learn where to look instead of guessing by elimination.
-/// Faster answers earn more points.
+/// Quiz: a sound plays and 10 or 15 animals that sound alike are on offer – all on one screen,
+/// no scrolling. Faster answers earn more points.
 struct QuizView: View {
     @Environment(AnimalStore.self) private var store
     @Environment(SoundPlayer.self) private var player
 
-    enum Choices: String, CaseIterable, Identifiable {
-        case ten = "10 ähnliche", twenty = "20 ähnliche", all = "Alle Tiere"
-        var id: String { rawValue }
-        var count: Int? { switch self { case .ten: 10; case .twenty: 20; case .all: nil } }
-        var info: String {
-            switch self {
-            case .ten: "10 Tiere, die ähnlich klingen"
-            case .twenty: "20 Tiere, die ähnlich klingen"
-            case .all: "Alle Tiere, sortiert nach Lebensraum"
-            }
-        }
-    }
-
     struct Round {
         let answer: Animal
-        let choices: [Animal]   // shown animals (all of the pool in "Alle Tiere" mode)
+        let choices: [Animal]
         var picked: Animal?
         let started = Date()
     }
 
     static let roundsPerGame = 10
     static let maxPoints = 100
+    static let choiceCounts = [10, 15]
     private let accent = Color(hex: "#2F78A8")
 
     @State private var showNames = true
-    @AppStorage("quizChoices") private var choices: Choices = .twenty
+    @AppStorage("quizChoiceCount") private var choiceCount = 15
     @State private var selected: Set<String> = []
     @State private var birdsOnly = false
     @State private var rounds: [Round] = []
@@ -73,12 +60,12 @@ struct QuizView: View {
 
                 VStack(alignment: .leading, spacing: 8) {
                     Text("Auswahl beim Raten").font(.headline).padding(.horizontal)
-                    Picker("Auswahl", selection: $choices) {
-                        ForEach(Choices.allCases) { Text($0.rawValue).tag($0) }
+                    Picker("Auswahl", selection: $choiceCount) {
+                        ForEach(Self.choiceCounts, id: \.self) { Text("\($0) ähnliche").tag($0) }
                     }
                     .pickerStyle(.segmented)
                     .padding(.horizontal)
-                    Text(choices.info).font(.subheadline).foregroundStyle(.secondary).padding(.horizontal)
+                    Text("\(choiceCount) Tiere, die ähnlich klingen").font(.subheadline).foregroundStyle(.secondary).padding(.horizontal)
                 }
                 VStack(alignment: .leading, spacing: 8) {
                     Text("Tiere").font(.headline).padding(.horizontal)
@@ -104,6 +91,7 @@ struct QuizView: View {
             .frame(maxWidth: .infinity)
             .padding(.bottom, 30)
         }
+        .onAppear { if !Self.choiceCounts.contains(choiceCount) { choiceCount = 15 } }
     }
 
     // MARK: Playing
@@ -111,98 +99,61 @@ struct QuizView: View {
     private func play(_ round: Round) -> some View {
         let answered = round.picked != nil
         let playing = player.playingID == round.answer.id
-        let cats = store.categories.filter { c in round.choices.contains { $0.category == c.id } }
-        return ScrollViewReader { proxy in
-            VStack(spacing: 0) {
-                VStack(spacing: 10) {
-                    HStack {
-                        Text("Runde \(rounds.count)/\(Self.roundsPerGame)").font(.headline)
-                        Spacer()
-                        if streak >= 2 {
-                            Label("\(streak)", systemImage: "flame.fill").foregroundStyle(.orange).font(.headline)
-                        }
-                        Text("\(score) Punkte").font(.headline.monospacedDigit())
-                            .contentTransition(.numericText())
-                    }
-                    Button { player.play(round.answer, from: store) } label: {
-                        Label(playing ? "Hör genau hin …" : "Nochmal hören",
-                              systemImage: playing ? "speaker.wave.3.fill" : "arrow.counterclockwise")
-                            .font(.headline)
-                            .symbolEffect(.variableColor.iterative, isActive: playing)
-                            .padding(.horizontal, 18).padding(.vertical, 10)
-                            .background(accent.opacity(0.14), in: Capsule())
-                    }
-                    .buttonStyle(.plain)
-                    if choices == .all && cats.count > 1 {
-                        ScrollView(.horizontal, showsIndicators: false) {
-                            HStack(spacing: 6) {
-                                ForEach(cats) { c in
-                                    Button { withAnimation { proxy.scrollTo("cat-" + c.id, anchor: .top) } } label: {
-                                        Label(c.name, systemImage: c.symbol)
-                                            .font(.footnote.weight(.semibold))
-                                            .padding(.horizontal, 10).padding(.vertical, 6)
-                                            .foregroundStyle(c.tint)
-                                            .background(c.tint.opacity(0.14), in: Capsule())
-                                    }
-                                    .buttonStyle(.plain)
-                                }
-                            }
-                        }
-                    }
+        return VStack(spacing: 8) {
+            HStack {
+                Text("Runde \(rounds.count)/\(Self.roundsPerGame)").font(.headline)
+                Spacer()
+                if streak >= 2 {
+                    Label("\(streak)", systemImage: "flame.fill").foregroundStyle(.orange).font(.headline)
                 }
-                .padding(.horizontal)
-                .padding(.vertical, 8)
-                .background(.bar)
+                Text("\(score) Punkte").font(.headline.monospacedDigit())
+                    .contentTransition(.numericText())
+            }
+            .padding(.horizontal)
+            Button { player.play(round.answer, from: store) } label: {
+                Label(playing ? "Hör genau hin …" : "Nochmal hören",
+                      systemImage: playing ? "speaker.wave.3.fill" : "arrow.counterclockwise")
+                    .font(.headline)
+                    .symbolEffect(.variableColor.iterative, isActive: playing)
+                    .padding(.horizontal, 18).padding(.vertical, 9)
+                    .background(accent.opacity(0.14), in: Capsule())
+            }
+            .buttonStyle(.plain)
 
-                ScrollView {
-                    if choices != .all {
-                        LazyVGrid(columns: [GridItem(.adaptive(minimum: 96, maximum: 150), spacing: 8)], spacing: 8) {
-                            ForEach(round.choices) { a in choiceTile(a, round: round).id(a.id) }
-                        }
-                        .padding()
-                    } else {
-                    LazyVStack(alignment: .leading, spacing: 10, pinnedViews: [.sectionHeaders]) {
-                        ForEach(cats) { c in
-                            Section {
-                                LazyVGrid(columns: [GridItem(.adaptive(minimum: 84, maximum: 130), spacing: 8)], spacing: 8) {
-                                    ForEach(round.choices.filter { $0.category == c.id }) { a in
-                                        choiceTile(a, round: round).id(a.id)
-                                    }
-                                }
-                                .padding(.horizontal)
-                            } header: {
-                                Label(c.name, systemImage: c.symbol)
-                                    .font(.subheadline.weight(.bold))
-                                    .foregroundStyle(c.tint)
-                                    .padding(.horizontal).padding(.vertical, 6)
-                                    .frame(maxWidth: .infinity, alignment: .leading)
-                                    .background(.regularMaterial)
-                                    .id("cat-" + c.id)
-                            }
-                        }
-                    }
-                    .padding(.bottom, 20)
+            // all choices on one screen: pick the column count that gives the biggest tiles
+            GeometryReader { geo in
+                let n = round.choices.count, gap: CGFloat = 8
+                let (cols, side) = Self.bestGrid(n: n, size: geo.size, gap: gap)
+                LazyVGrid(columns: Array(repeating: GridItem(.fixed(side), spacing: gap), count: cols), spacing: gap) {
+                    ForEach(round.choices) { a in
+                        choiceTile(a, round: round).frame(width: side, height: side)
                     }
                 }
+                .frame(width: geo.size.width, height: geo.size.height, alignment: .top)
             }
-            .safeAreaInset(edge: .bottom) {
-                if answered {
-                    feedback(round)
-                        .padding()
-                        .background(.regularMaterial)
-                        .transition(.move(edge: .bottom).combined(with: .opacity))
-                }
-            }
-            .onChange(of: answered) { _, now in
-                // after a wrong answer, show where the right animal is
-                if now, round.picked?.id != round.answer.id {
-                    withAnimation { proxy.scrollTo(round.answer.id, anchor: .center) }
-                }
-            }
-            .onChange(of: rounds.count) {
-                if let first = cats.first { proxy.scrollTo("cat-" + first.id, anchor: .top) }
+            .padding(.horizontal, 10)
+        }
+        .padding(.top, 6)
+        .safeAreaInset(edge: .bottom) {
+            if answered {
+                feedback(round)
+                    .padding()
+                    .background(.regularMaterial)
+                    .transition(.move(edge: .bottom).combined(with: .opacity))
             }
         }
+    }
+
+    /// Column count and tile side that make `n` square tiles as large as possible inside `size`.
+    static func bestGrid(n: Int, size: CGSize, gap: CGFloat) -> (Int, CGFloat) {
+        var best = (2, CGFloat(0))
+        for cols in 2...6 {
+            let rows = (n + cols - 1) / cols
+            let side = min((size.width - gap * CGFloat(cols - 1)) / CGFloat(cols),
+                           (size.height - gap * CGFloat(rows - 1)) / CGFloat(rows))
+            if side > best.1 { best = (cols, side) }
+        }
+        return (best.0, max(40, floor(best.1)))
     }
 
     private func choiceTile(_ a: Animal, round: Round) -> some View {
@@ -215,7 +166,7 @@ struct QuizView: View {
                     RoundedRectangle(cornerRadius: 20, style: .continuous)
                         .stroke(isAnswer ? Color.green : Color.red, lineWidth: 5)
                     Image(systemName: isAnswer ? "checkmark.circle.fill" : "xmark.circle.fill")
-                        .font(.system(size: 34))
+                        .font(.system(size: 30))
                         .foregroundStyle(.white, isAnswer ? Color.green : Color.red)
                         .shadow(radius: 4)
                 }
@@ -327,7 +278,7 @@ struct QuizView: View {
         }
         let used = Set(rounds.map(\.answer.id))
         guard let answer = (pool.filter { !used.contains($0.id) }.randomElement() ?? pool.randomElement()) else { return }
-        let shown = choices.count.map { SoundGroups.similar(to: answer, in: pool, count: $0) } ?? pool
+        let shown = SoundGroups.similar(to: answer, in: pool, count: min(choiceCount, 15))
         rounds.append(Round(answer: answer, choices: shown))
         player.play(answer, from: store)
     }
@@ -338,9 +289,8 @@ struct QuizView: View {
         let right = a.id == round.answer.id
         if right {
             let seconds = Date().timeIntervalSince(round.started)
-            // Searching takes time: 100 points within 5 s, dropping to 30 at 25 s;
-            // streak bonus +10 per step (max +50).
-            let speed = max(0.3, min(1, 1 - (seconds - 5) / 20 * 0.7))
+            // 100 points within 4 s, dropping to 30 at 20 s; streak bonus +10 per step (max +50).
+            let speed = max(0.3, min(1, 1 - (seconds - 4) / 16 * 0.7))
             let points = Int(Double(Self.maxPoints) * speed) + min(streak, 5) * 10
             streak += 1
             lastPoints = points

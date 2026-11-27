@@ -195,7 +195,7 @@ function together() {
   const body = () => {
     const pool = poolOf(st), el = $app.querySelector("#body");
     if (st.mode === "random") {
-      el.innerHTML = `<div class="center stack"><p style="font-size:1.2rem">Drück den Knopf, ein zufälliges Tier ist zu hören. Die anderen raten!</p>
+      el.innerHTML = `<div class="center stack"><p style="font-size:1.2rem">Drück den Knopf: Du siehst ein zufälliges Tier und spielst sein Geräusch ab. Die anderen raten!</p>
         <p class="muted">${pool.length} Tiere in der Auswahl</p><button class="big" style="--c:${C}" id="go" ${pool.length ? "" : "disabled"}>▶ Geräusch abspielen</button></div>`;
       el.querySelector("#go").onclick = () => {
         const fresh = pool.filter(a => !st.recent.includes(a.id));
@@ -209,14 +209,20 @@ function together() {
     }
   };
   const hidden = (a) => {
-    $app.innerHTML = `<div class="wrap">${bar("Rätsel zu zweit")}<div class="stack center" style="--c:${C}">
-      <button class="mystery" id="mys">?</button><h2 style="font-size:2rem;margin:0">Welches Tier ist das?</h2>
-      <div class="row"><button class="big gray" id="again">↻ Nochmal</button><button class="big" style="--c:${C}" id="reveal">👁 Auflösen</button></div></div></div>`;
-    const mys = $app.querySelector("#mys");
-    const upd = () => { mys.textContent = playingId === a.id ? "🔊" : "?"; };
-    onPlayChange.add(upd);
-    mys.onclick = $app.querySelector("#again").onclick = () => play(a);
-    $app.querySelector("#reveal").onclick = () => revealed(a);
+    const c = CAT[a.category];
+    $app.innerHTML = `<div class="wrap">${bar("Rätsel zu zweit")}<div class="stack center">
+      <p class="muted" style="margin:6px 0 0">👁 Nur du siehst das Tier – die anderen raten!</p>
+      <div class="hero-pop" style="position:relative;max-width:380px;margin:0 auto;width:100%;cursor:pointer" id="pic">${popOut(a, .32)}
+        <button class="play" id="pl" style="position:absolute;right:6px;bottom:6px;width:60px;height:60px;border-radius:50%;border:0;color:#fff;font-size:1.4rem;background:${c.color};box-shadow:0 3px 10px rgb(0 0 0 / .25)">▶</button></div>
+      <h2 style="font-size:2.2rem;margin:0">${esc(a.name)}</h2><div style="color:${c.color};font-weight:800">${esc(c.name)}</div>
+      <button class="txtlink" id="more">ⓘ Mehr über das Tier</button>
+      <div class="row"><button class="big gray" id="again">↻ Nochmal</button><button class="big" style="--c:${C}" id="next">⏭ Nächstes Tier</button></div></div></div>`;
+    const pl = $app.querySelector("#pl");
+    onPlayChange.clear(); onPlayChange.add(() => { pl.textContent = playingId === a.id ? "🔊" : "▶"; });
+    $app.querySelector("#pic").onclick = () => toggle(a);
+    $app.querySelector("#again").onclick = (e) => { e.stopPropagation(); play(a); };
+    $app.querySelector("#more").onclick = () => showCard(a);
+    $app.querySelector("#next").onclick = () => { if (st.mode === "random") { setup(); $app.querySelector("#go")?.click(); } else { stop(); setup(); } };
     play(a);
   };
   const revealed = (a) => {
@@ -236,6 +242,23 @@ function together() {
   setup();
 }
 
+/* size n square tiles so they all fit into the space below the grid's top edge */
+function fitGrid(el, n, reserve) {
+  const apply = () => {
+    const W = el.clientWidth, H = window.innerHeight - el.getBoundingClientRect().top - reserve - 8, gap = 8;
+    let best = [2, 0];
+    for (let cols = 2; cols <= 6; cols++) {
+      const rows = Math.ceil(n / cols);
+      // a tile is the square picture plus a name line below it (~30 px)
+      const side = Math.min((W - gap * (cols - 1)) / cols, (H - gap * (rows - 1)) / rows - 30);
+      if (side > best[1]) best = [cols, side];
+    }
+    el.style.gridTemplateColumns = `repeat(${best[0]}, ${Math.max(56, Math.floor(best[1]))}px)`;
+  };
+  apply();
+  window.onresize = apply;
+}
+
 /* ---------- Quiz: all animals, or the 10/20 that sound most alike ---------- */
 const NEIGH = { zwitschern: ["kreischen", "rufen", "zirpen"], kreischen: ["zwitschern", "rufen", "wasservogel"], rufen: ["kreischen", "wasservogel", "zwitschern"], wasservogel: ["rufen", "kreischen", "meer"], bruellen: ["heulen", "grunzen", "affen"], heulen: ["bruellen", "affen", "blöken"], "blöken": ["grunzen", "heulen", "bruellen"], grunzen: ["blöken", "bruellen", "meer"], affen: ["bruellen", "heulen", "kreischen"], meer: ["wasservogel", "grunzen", "bruellen"], zirpen: ["zwitschern", "rufen", "grunzen"] };
 function similar(ans, pool, n) {
@@ -247,13 +270,13 @@ function similar(ans, pool, n) {
 }
 function quiz() {
   const ROUNDS = 10, Q = "#2F78A8";
-  const st = { cats: new Set(), birds: false, choices: store.get("quizChoices", 20), names: true };
+  const st = { cats: new Set(), birds: false, choices: [10, 15].includes(store.get("quizChoices", 15)) ? store.get("quizChoices", 15) : 15, names: true };
   let rounds = [], score = 0, streak = 0, last = 0;
   const setup = () => {
     const best = store.get("quizBest", 0);
     $app.innerHTML = `<div class="wrap">${bar("Quiz")}<div class="stack">
       <p class="center" style="font-size:1.2rem">⚡ Hör genau hin und finde das richtige Tier so schnell wie möglich!</p>
-      <div><p class="label">Auswahl beim Raten</p><div class="seg">${[[10, "10 ähnliche"], [20, "20 ähnliche"], [0, "Alle Tiere"]].map(([v, t]) => `<button data-c="${v}" aria-pressed="${st.choices === v}">${t}</button>`).join("")}</div></div>
+      <div><p class="label">Auswahl beim Raten</p><div class="seg">${[[10, "10 ähnliche"], [15, "15 ähnliche"]].map(([v, t]) => `<button data-c="${v}" aria-pressed="${st.choices === v}">${t}</button>`).join("")}</div></div>
       <div><p class="label">Tiere</p><div id="flt"></div><p class="muted" id="cnt"></p></div>
       <label class="switch panel"><span><b>Namen anzeigen</b><br><span class="muted">Ohne Namen ist es schwerer.</span></span><input type="checkbox" id="names" ${st.names ? "checked" : ""}></label>
       ${best ? `<p class="center" style="color:#E08A00;font-weight:900">🏆 Rekord: ${best} Punkte</p>` : ""}
@@ -268,35 +291,30 @@ function quiz() {
     if (rounds.length >= ROUNDS) return results();
     const pool = poolOf(st), used = new Set(rounds.map(r => r.answer.id));
     const answer = pick(pool.filter(a => !used.has(a.id)).length ? pool.filter(a => !used.has(a.id)) : pool);
-    const shown = st.choices ? similar(answer, pool, st.choices) : pool;
+    const shown = similar(answer, pool, Math.min(st.choices || 15, 15));
     rounds.push({ answer, shown, picked: null, t0: Date.now() });
     draw(); play(answer);
   };
   const draw = () => {
     const r = rounds[rounds.length - 1], done = !!r.picked;
-    const grouped = !st.choices;
-    const cats = DATA.categories.filter(c => r.shown.some(a => a.category === c.id));
     const tileFor = (a) => {
       let cls = "";
       if (done) cls = a.id === r.answer.id ? "right" : a.id === r.picked.id ? "wrong" : "dim";
       return tile(a, { name: st.names || done, live: false }).replace('class="tile"', `class="tile ${cls}"`)
         .replace("</button>", (done && (a.id === r.answer.id || a.id === r.picked.id)) ? `<span class="mark">${a.id === r.answer.id ? "✅" : "❌"}</span></button>` : "</button>");
     };
-    $app.innerHTML = `<div class="wrap">${bar("Quiz")}
+    $app.innerHTML = `<div class="wrap quizwrap">${bar("Quiz")}
       <div class="stats"><span>Runde ${rounds.length}/${ROUNDS}</span><span>${streak >= 2 ? `🔥${streak} · ` : ""}${score} Punkte</span></div>
       <button class="replay" id="rp">↻ Nochmal hören</button>
-      ${grouped ? `<div class="chips">${cats.map(c => `<button class="chip" style="--c:${c.color}" data-jump="${c.id}">${esc(c.name)}</button>`).join("")}</div>
-        ${cats.map(c => `<div class="sec" id="q-${c.id}" style="--c:${c.color}"><span class="ic">${EMOJI[c.id] || ""}</span><div><b>${esc(c.name)}</b></div></div><div class="grid small">${r.shown.filter(a => a.category === c.id).map(tileFor).join("")}</div>`).join("")}`
-      : `<div class="grid">${r.shown.map(tileFor).join("")}</div>`}
+      <div class="fitgrid" id="fg">${r.shown.map(tileFor).join("")}</div>
       ${done ? `<div class="feedback">${popOut(r.answer)}<div><b style="color:${r.picked.id === r.answer.id ? "var(--good)" : "var(--bad)"}">${r.picked.id === r.answer.id ? `Richtig! +${last}` : `Das war: ${esc(r.answer.name)}`}</b><button class="txtlink" id="inf">Infos zum Tier</button></div><button class="go" id="nx">${rounds.length === ROUNDS ? "Ergebnis" : "Weiter ⏭"}</button></div>` : ""}
     </div>`;
+    fitGrid($app.querySelector("#fg"), r.shown.length, done ? 96 : 12);
     $app.querySelector("#rp").onclick = () => play(r.answer);
-    $app.querySelectorAll("[data-jump]").forEach(b => b.onclick = () => document.getElementById("q-" + b.dataset.jump).scrollIntoView({ behavior: "smooth" }));
     if (!done) $app.querySelectorAll(".tile").forEach(t => t.onclick = () => answer(byId(t.dataset.id)));
     else {
       $app.querySelector("#nx").onclick = next;
       $app.querySelector("#inf").onclick = () => showCard(r.answer);
-      if (r.picked.id !== r.answer.id) $app.querySelector(`.tile[data-id="${r.answer.id}"]`)?.scrollIntoView({ block: "center", behavior: "smooth" });
     }
   };
   const answer = (a) => {

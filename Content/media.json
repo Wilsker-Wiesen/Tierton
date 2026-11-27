@@ -151,11 +151,11 @@
   },
   "biber": {
     "image": {
-      "title": "File:Castor fiber vistulanus2.jpg",
-      "artist": "Klaudiusz Muchowski",
-      "license": "CC BY-SA 3.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
-      "page": "https://commons.wikimedia.org/wiki/File%3ACastor_fiber_vistulanus2.jpg",
+      "title": "File:Bäver närbild.jpg",
+      "artist": "Tjustorparn",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "page": "https://commons.wikimedia.org/wiki/File%3AB%C3%A4ver_n%C3%A4rbild.jpg",
       "edited": "freigestellt"
     },
     "iucn": "LC",
@@ -459,14 +459,7 @@
       "edited": "freigestellt"
     },
     "iucn": "LC",
-    "wikidata": "Q213021",
-    "sound": {
-      "title": "File:Pygoscelis papua Henry Doorly Zoo, Omaha, USA -swimming-8.ogv",
-      "artist": "The Doodler",
-      "license": "CC BY-SA 2.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
-      "page": "https://commons.wikimedia.org/wiki/File%3APygoscelis_papua_Henry_Doorly_Zoo%2C_Omaha%2C_USA_-swimming-8.ogv"
-    }
+    "wikidata": "Q213021"
   },
   "frosch": {
     "image": {
@@ -659,14 +652,7 @@
       "edited": "freigestellt"
     },
     "iucn": "NT",
-    "wikidata": "Q6145",
-    "sound": {
-      "title": "File:03-European Hedgehog 11-Apr-2021 nX.webm",
-      "artist": "PsamatheM",
-      "license": "CC BY-SA 4.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
-      "page": "https://commons.wikimedia.org/wiki/File%3A03-European_Hedgehog_11-Apr-2021_nX.webm"
-    }
+    "wikidata": "Q6145"
   },
   "jaguar": {
     "image": {
@@ -1061,14 +1047,7 @@
       "edited": "freigestellt"
     },
     "iucn": "LC",
-    "wikidata": "Q159426",
-    "sound": {
-      "title": "File:Upside-down-swimming-behaviour-of-free-ranging-narwhals-1472-6785-7-14-S2.ogv",
-      "artist": "Dietz R, Shapiro A, Bakhtiari M, Orr J, Tyack P, Richard P, Eskesen I, Marshall G",
-      "license": "CC BY 2.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
-      "page": "https://commons.wikimedia.org/wiki/File%3AUpside-down-swimming-behaviour-of-free-ranging-narwhals-1472-6785-7-14-S2.ogv"
-    }
+    "wikidata": "Q159426"
   },
   "nashorn": {
     "image": {
@@ -1260,11 +1239,11 @@
   },
   "pottwal": {
     "image": {
-      "title": "File:Mother and baby sperm whale.jpg",
-      "artist": "Gabriel Barathieu",
-      "license": "CC BY-SA 2.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
-      "page": "https://commons.wikimedia.org/wiki/File%3AMother_and_baby_sperm_whale.jpg",
+      "title": "File:0b4a8510 by vitaly sokol-dbw6sol.jpg",
+      "artist": "Will Falcon aka Vitaly Sokol",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+      "page": "https://commons.wikimedia.org/wiki/File%3A0b4a8510_by_vitaly_sokol-dbw6sol.jpg",
       "edited": "freigestellt"
     },
     "iucn": "VU",
@@ -1299,14 +1278,7 @@
       "edited": "freigestellt"
     },
     "iucn": null,
-    "wikidata": null,
-    "sound": {
-      "title": "File:Reindeer Svalbard.ogv",
-      "artist": "Superchilum",
-      "license": "CC BY-SA 3.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
-      "page": "https://commons.wikimedia.org/wiki/File%3AReindeer_Svalbard.ogv"
-    }
+    "wikidata": null
   },
   "rotaugenfrosch": {
     "image": {
@@ -1429,11 +1401,11 @@
   },
   "schwein": {
     "image": {
-      "title": "File:Sow with piglet.jpg",
-      "artist": "Scott Bauer, USDA",
-      "license": "Public domain",
-      "licenseUrl": "",
-      "page": "https://commons.wikimedia.org/wiki/File%3ASow_with_piglet.jpg",
+      "title": "File:Pot-bellied pigs in Lisbon Zoo 2008.jpg",
+      "artist": "Alvesgaspar",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "page": "https://commons.wikimedia.org/wiki/File%3APot-bellied_pigs_in_Lisbon_Zoo_2008.jpg",
       "edited": "freigestellt"
     },
     "iucn": null,
@@ -1506,7 +1478,14 @@
       "edited": "freigestellt"
     },
     "iucn": "LC",
-    "wikidata": "Q379732"
+    "wikidata": "Q379732",
+    "sound": {
+      "title": "File:California sea lions (Zalophus californianus) in Columbia River.webm",
+      "artist": "yaquina",
+      "license": "CC BY 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+      "page": "https://commons.wikimedia.org/wiki/File%3ACalifornia_sea_lions_%28Zalophus_californianus%29_in_Columbia_River.webm"
+    }
   },
   "spatz": {
     "image": {
@@ -1655,11 +1634,11 @@
   },
   "walross": {
     "image": {
-      "title": "File:Walrus in the Russian Arctic National Park, Novaya Zemlya 2015-2.jpg",
-      "artist": "Nixette",
-      "license": "CC BY-SA 4.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
-      "page": "https://commons.wikimedia.org/wiki/File%3AWalrus_in_the_Russian_Arctic_National_Park%2C_Novaya_Zemlya_2015-2.jpg",
+      "title": "File:Pacific Walrus - Bull (8247646168).jpg",
+      "artist": "Joel Garlich-Miller, U.S. Fish and Wildlife Service",
+      "license": "Public domain",
+      "licenseUrl": "",
+      "page": "https://commons.wikimedia.org/wiki/File%3APacific_Walrus_-_Bull_%288247646168%29.jpg",
       "edited": "freigestellt"
     },
     "iucn": "VU",
@@ -1686,11 +1665,11 @@
   },
   "wildhund": {
     "image": {
-      "title": "File:Lycaon pictus (Temminck, 1820).jpg",
-      "artist": "Michael Gäbler",
-      "license": "CC BY 3.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
-      "page": "https://commons.wikimedia.org/wiki/File%3ALycaon_pictus_%28Temminck%2C_1820%29.jpg",
+      "title": "File:African wild dog (Lycaon pictus pictus) head.jpg",
+      "artist": "Charles J. Sharp",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "page": "https://commons.wikimedia.org/wiki/File%3AAfrican_wild_dog_%28Lycaon_pictus_pictus%29_head.jpg",
       "edited": "freigestellt"
     },
     "iucn": null,
@@ -1770,7 +1749,14 @@
       "edited": "freigestellt"
     },
     "iucn": "NT",
-    "wikidata": "Q245305"
+    "wikidata": "Q245305",
+    "sound": {
+      "title": "File:Plains Zebra (Equus quagga burchellii) coming to drink ....webm",
+      "artist": "Bernard DUPONT",
+      "license": "CC BY-SA 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+      "page": "https://commons.wikimedia.org/wiki/File%3APlains_Zebra_%28Equus_quagga_burchellii%29_coming_to_drink_....webm"
+    }
   },
   "zuegelpinguin": {
     "image": {
@@ -1862,11 +1848,11 @@
   },
   "kuh": {
     "image": {
-      "title": "File:Cow (Fleckvieh breed) Oeschinensee Slaunger 2009-07-07.jpg",
-      "artist": "Kim Hansen",
-      "license": "CC BY-SA 3.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
-      "page": "https://commons.wikimedia.org/wiki/File%3ACow_%28Fleckvieh_breed%29_Oeschinensee_Slaunger_2009-07-07.jpg",
+      "title": "File:Cow female black white.jpg",
+      "artist": "Keith Weller/USDA",
+      "license": "Public domain",
+      "licenseUrl": "",
+      "page": "https://commons.wikimedia.org/wiki/File%3ACow_female_black_white.jpg",
       "edited": "freigestellt"
     },
     "iucn": null,
@@ -1881,11 +1867,11 @@
   },
   "rotfuchs": {
     "image": {
-      "title": "File:Red Fox Portrait.png",
-      "artist": "Chuck Homler, Focus On Wildlife",
+      "title": "File:Renard roux Ichkeul.jpg",
+      "artist": "El Golli Mohamed",
       "license": "CC BY-SA 4.0",
       "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
-      "page": "https://commons.wikimedia.org/wiki/File%3ARed_Fox_Portrait.png",
+      "page": "https://commons.wikimedia.org/wiki/File%3ARenard_roux_Ichkeul.jpg",
       "edited": "freigestellt"
     },
     "iucn": "LC",
@@ -1958,14 +1944,7 @@
       "edited": "freigestellt"
     },
     "iucn": "CR",
-    "wikidata": "Q599672",
-    "sound": {
-      "title": "File:Orangutan Taman Safari Indonesia.ogv",
-      "artist": "Midori",
-      "license": "CC BY-SA 3.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
-      "page": "https://commons.wikimedia.org/wiki/File%3AOrangutan_Taman_Safari_Indonesia.ogv"
-    }
+    "wikidata": "Q599672"
   },
   "pavian": {
     "image": {
@@ -2012,11 +1991,11 @@
   },
   "taube": {
     "image": {
-      "title": "File:Fonte Gaia - she wolf detail.jpg",
-      "artist": "Petar Milošević",
+      "title": "File:Rock doves in flight.jpg",
+      "artist": "Laitche",
       "license": "CC BY-SA 4.0",
       "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
-      "page": "https://commons.wikimedia.org/wiki/File%3AFonte_Gaia_-_she_wolf_detail.jpg",
+      "page": "https://commons.wikimedia.org/wiki/File%3ARock_doves_in_flight.jpg",
       "edited": "freigestellt"
     },
     "iucn": null,

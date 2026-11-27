@@ -48,6 +48,21 @@ def main():
     used = {a["category"] for a in animals}
     data = {"categories": [c for c in cat["categories"] if c["id"] in used], "animals": animals}
     json.dump(data, open(os.path.join(OUT, "animals.json"), "w"), ensure_ascii=False, separators=(",", ":"))
+    # cache-busting: browsers must fetch the new app.js/style.css after every update
+    import hashlib
+    idx = os.path.join(OUT, "index.html")
+    html = open(idx).read()
+    for f in ("style.css",):
+        h = hashlib.sha1(open(os.path.join(OUT, f), "rb").read()).hexdigest()[:8]
+        html = html.replace(f'"{f}"', f'"{f}?v={h}"')
+    open(idx, "w").write(html)
+    js = os.path.join(OUT, "app.js")
+    h = hashlib.sha1(open(os.path.join(OUT, "animals.json"), "rb").read()).hexdigest()[:8]
+    code = open(js).read().replace('fetch("animals.json")', f'fetch("animals.json?v={h}")')
+    open(js, "w").write(code)
+    hj = hashlib.sha1(code.encode()).hexdigest()[:8]
+    html = open(idx).read().replace('"app.js"', f'"app.js?v={hj}"')
+    open(idx, "w").write(html)
     # GitHub Pages: serve files as-is (no Jekyll processing)
     open(os.path.join(OUT, ".nojekyll"), "w").close()
     size = sum(os.path.getsize(os.path.join(dp, f)) for dp, _, fs in os.walk(OUT) for f in fs)
