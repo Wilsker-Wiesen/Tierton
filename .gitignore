@@ -1,0 +1,14 @@
+.DS_Store
+xcuserdata/
+DerivedData/
+build/
+*.xcuserstate
+tools/.cache/
+tools/resolve.log
+tools/*.log
+tools/icon_tukan_hires.heic
+tools/icon-ideas/img/
+tools/photo-choice/img/
+tools/photo-choice/choices.json
+tools/missing_sound_candidates.json
+tools/sound_qa*.txt

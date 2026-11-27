@@ -1,0 +1,428 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		04CC7C23C4F010682800A7F4 /* VoiceQuizView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB46864953FE40CFD3D8455 /* VoiceQuizView.swift */; };
+		1F340E20FCE7B70EEC9E19E5 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1372519C587D2A53CF626304 /* HomeView.swift */; };
+		3BC19D4D176CD24BE1BA2DB9 /* CreditsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F902A4518F43FD7397D3CE /* CreditsView.swift */; };
+		3DBD2D7CFA4DBC37A661E986 /* AnimalDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24847AF25070E4B426439660 /* AnimalDetailView.swift */; };
+		405AD729180DED0374665694 /* SpeechListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EF2A13CAF26C9C795E9D1F /* SpeechListener.swift */; };
+		4EB089675FA9DA09506BCC3E /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A81106C912581796B5D051C /* Models.swift */; };
+		618378D42ECF598C2A762849 /* Components.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C1F35876F9BD6AE04B5C636 /* Components.swift */; };
+		7BB6611978C1A4E3BACF6B49 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07DDA6A1092502A4AE98E462 /* Assets.xcassets */; };
+		92B305B01FEDA48231D479F4 /* SoundPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E65C0E0828471C7D212618 /* SoundPlayer.swift */; };
+		95F47CDF5022F95D6F0D7427 /* TogetherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C8DAF8B54392A1F55081BD /* TogetherView.swift */; };
+		A97C0C3E65CAFDA6BC415C00 /* AnimalStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5C7C56DEE0E7F49B165CC35 /* AnimalStore.swift */; };
+		AED18C472EE95021FACB1592 /* catalog.json in Resources */ = {isa = PBXBuildFile; fileRef = B068B11B3B0CEB4DF1BF0442 /* catalog.json */; };
+		AFF99705B97A49979CCEFCAC /* Media in Resources */ = {isa = PBXBuildFile; fileRef = 4E6096CC7EF9DF4E47A4825F /* Media */; };
+		D26012468279DEF736ECF92B /* media.json in Resources */ = {isa = PBXBuildFile; fileRef = C489848B0D82E3E95B7C4CD3 /* media.json */; };
+		D386D27DFA0921B9883CDD76 /* TiertonApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E3E18F95762F9D58AF405A /* TiertonApp.swift */; };
+		F28FE9D487390ECED3E7F89E /* QuizView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6DD9B2A6B73F51DF1D9C09C /* QuizView.swift */; };
+		F2F1D5975AEE9E55047F9B28 /* facts.json in Resources */ = {isa = PBXBuildFile; fileRef = AA870D39663482D3D85F8A8C /* facts.json */; };
+		F961796E768CB2B3DAAD8FAE /* ExploreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF3925924A7BA48F9888F62E /* ExploreView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		03C8DAF8B54392A1F55081BD /* TogetherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TogetherView.swift; sourceTree = "<group>"; };
+		07DDA6A1092502A4AE98E462 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		1372519C587D2A53CF626304 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		14F902A4518F43FD7397D3CE /* CreditsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditsView.swift; sourceTree = "<group>"; };
+		18E65C0E0828471C7D212618 /* SoundPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundPlayer.swift; sourceTree = "<group>"; };
+		24847AF25070E4B426439660 /* AnimalDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalDetailView.swift; sourceTree = "<group>"; };
+		37EF2A13CAF26C9C795E9D1F /* SpeechListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechListener.swift; sourceTree = "<group>"; };
+		45763F142D0475AC56504541 /* Tierton.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = Tierton.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4E6096CC7EF9DF4E47A4825F /* Media */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Media; path = Tierton/Resources/Media; sourceTree = SOURCE_ROOT; };
+		6A81106C912581796B5D051C /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+		97E3E18F95762F9D58AF405A /* TiertonApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TiertonApp.swift; sourceTree = "<group>"; };
+		9C1F35876F9BD6AE04B5C636 /* Components.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Components.swift; sourceTree = "<group>"; };
+		9FB46864953FE40CFD3D8455 /* VoiceQuizView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceQuizView.swift; sourceTree = "<group>"; };
+		AA870D39663482D3D85F8A8C /* facts.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = facts.json; sourceTree = "<group>"; };
+		B068B11B3B0CEB4DF1BF0442 /* catalog.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = catalog.json; sourceTree = "<group>"; };
+		C489848B0D82E3E95B7C4CD3 /* media.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = media.json; sourceTree = "<group>"; };
+		D5C7C56DEE0E7F49B165CC35 /* AnimalStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalStore.swift; sourceTree = "<group>"; };
+		E6DD9B2A6B73F51DF1D9C09C /* QuizView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizView.swift; sourceTree = "<group>"; };
+		FF3925924A7BA48F9888F62E /* ExploreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreView.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		02C6071EB96CFB4CE6AB02C5 /* Tierton */ = {
+			isa = PBXGroup;
+			children = (
+				7250ED5BFFD9A32AEFAEAAA0 /* App */,
+				3B7B9C86A824630A52F6F382 /* Model */,
+				E3D4FC756796E8925B936DDF /* Resources */,
+				8972D24A06DA7CCC488F081A /* Views */,
+			);
+			path = Tierton;
+			sourceTree = "<group>";
+		};
+		06C787E34D6D3D64C8320FEF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				45763F142D0475AC56504541 /* Tierton.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0DBCE77D6DCCD2C1F2326F52 /* Content */ = {
+			isa = PBXGroup;
+			children = (
+				B068B11B3B0CEB4DF1BF0442 /* catalog.json */,
+				AA870D39663482D3D85F8A8C /* facts.json */,
+				C489848B0D82E3E95B7C4CD3 /* media.json */,
+			);
+			path = Content;
+			sourceTree = "<group>";
+		};
+		3B7B9C86A824630A52F6F382 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D5C7C56DEE0E7F49B165CC35 /* AnimalStore.swift */,
+				6A81106C912581796B5D051C /* Models.swift */,
+				18E65C0E0828471C7D212618 /* SoundPlayer.swift */,
+				37EF2A13CAF26C9C795E9D1F /* SpeechListener.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		7250ED5BFFD9A32AEFAEAAA0 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				97E3E18F95762F9D58AF405A /* TiertonApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		8972D24A06DA7CCC488F081A /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				24847AF25070E4B426439660 /* AnimalDetailView.swift */,
+				9C1F35876F9BD6AE04B5C636 /* Components.swift */,
+				14F902A4518F43FD7397D3CE /* CreditsView.swift */,
+				FF3925924A7BA48F9888F62E /* ExploreView.swift */,
+				1372519C587D2A53CF626304 /* HomeView.swift */,
+				E6DD9B2A6B73F51DF1D9C09C /* QuizView.swift */,
+				03C8DAF8B54392A1F55081BD /* TogetherView.swift */,
+				9FB46864953FE40CFD3D8455 /* VoiceQuizView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		E3D4FC756796E8925B936DDF /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				07DDA6A1092502A4AE98E462 /* Assets.xcassets */,
+				4E6096CC7EF9DF4E47A4825F /* Media */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		E8958D9CF0C19AC9A8EDCA46 = {
+			isa = PBXGroup;
+			children = (
+				0DBCE77D6DCCD2C1F2326F52 /* Content */,
+				02C6071EB96CFB4CE6AB02C5 /* Tierton */,
+				06C787E34D6D3D64C8320FEF /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		E631CDFE2DF5B36BC0E0062F /* Tierton */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 19E3E5102AA54C8C82BDAED5 /* Build configuration list for PBXNativeTarget "Tierton" */;
+			buildPhases = (
+				B0F29CB3D450079B5E7BC702 /* Sources */,
+				BE81CC66766543DAA3F762B7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Tierton;
+			packageProductDependencies = (
+			);
+			productName = Tierton;
+			productReference = 45763F142D0475AC56504541 /* Tierton.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		40B6D4A9B89A7AB87DF7C3A9 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					E631CDFE2DF5B36BC0E0062F = {
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = D41DD2626E28DAD03DB64CD8 /* Build configuration list for PBXProject "Tierton" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = E8958D9CF0C19AC9A8EDCA46;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 06C787E34D6D3D64C8320FEF /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				E631CDFE2DF5B36BC0E0062F /* Tierton */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		BE81CC66766543DAA3F762B7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7BB6611978C1A4E3BACF6B49 /* Assets.xcassets in Resources */,
+				AFF99705B97A49979CCEFCAC /* Media in Resources */,
+				AED18C472EE95021FACB1592 /* catalog.json in Resources */,
+				F2F1D5975AEE9E55047F9B28 /* facts.json in Resources */,
+				D26012468279DEF736ECF92B /* media.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		B0F29CB3D450079B5E7BC702 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3DBD2D7CFA4DBC37A661E986 /* AnimalDetailView.swift in Sources */,
+				A97C0C3E65CAFDA6BC415C00 /* AnimalStore.swift in Sources */,
+				618378D42ECF598C2A762849 /* Components.swift in Sources */,
+				3BC19D4D176CD24BE1BA2DB9 /* CreditsView.swift in Sources */,
+				F961796E768CB2B3DAAD8FAE /* ExploreView.swift in Sources */,
+				1F340E20FCE7B70EEC9E19E5 /* HomeView.swift in Sources */,
+				4EB089675FA9DA09506BCC3E /* Models.swift in Sources */,
+				F28FE9D487390ECED3E7F89E /* QuizView.swift in Sources */,
+				92B305B01FEDA48231D479F4 /* SoundPlayer.swift in Sources */,
+				405AD729180DED0374665694 /* SpeechListener.swift in Sources */,
+				D386D27DFA0921B9883CDD76 /* TiertonApp.swift in Sources */,
+				95F47CDF5022F95D6F0D7427 /* TogetherView.swift in Sources */,
+				04CC7C23C4F010682800A7F4 /* VoiceQuizView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		6C8828FC646499FBDFF167C9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = Tierton;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Bei „Sag's laut!“ hört Tierton zu, welches Tier du sagst.";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "Tierton erkennt den Tiernamen, den du laut sagst. Wenn möglich passiert das direkt auf dem Gerät.";
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = de.wilsker.tierton;
+				PRODUCT_NAME = Tierton;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		AAAB1B2620404D1BFB7CB0BE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		B8EB9C567B851FCD04DC27BC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		BC102D4D2617FB423757582D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = Tierton;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Bei „Sag's laut!“ hört Tierton zu, welches Tier du sagst.";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "Tierton erkennt den Tiernamen, den du laut sagst. Wenn möglich passiert das direkt auf dem Gerät.";
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = de.wilsker.tierton;
+				PRODUCT_NAME = Tierton;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		19E3E5102AA54C8C82BDAED5 /* Build configuration list for PBXNativeTarget "Tierton" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BC102D4D2617FB423757582D /* Debug */,
+				6C8828FC646499FBDFF167C9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		D41DD2626E28DAD03DB64CD8 /* Build configuration list for PBXProject "Tierton" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AAAB1B2620404D1BFB7CB0BE /* Debug */,
+				B8EB9C567B851FCD04DC27BC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 40B6D4A9B89A7AB87DF7C3A9 /* Project object */;
+}
