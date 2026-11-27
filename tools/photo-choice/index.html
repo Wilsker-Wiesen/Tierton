@@ -1,0 +1,242 @@
+<title>Tierton Fotoauswahl</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700&display=swap">
+<style>
+/* Layout: one animal at a time, two pop-out variants side by side, progress map of all animals below. */
+:root {
+  --bg: #F2F4EF;
+  --surface: #FFFFFF;
+  --ink: #1F2A22;
+  --muted: #5E6B61;
+  --line: #DCE2D8;
+  --accent: #2E8B57;
+  --accent-ink: #FFFFFF;
+  --none: #B5523B;
+  --font-display: "Fredoka", "SF Pro Rounded", ui-rounded, system-ui, sans-serif;
+  --font-body: "Nunito", ui-rounded, system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #141915; --surface: #1E2520; --ink: #E8EDE6; --muted: #9DAA9F; --line: #2E3830;
+    --accent: #4DB27A; --accent-ink: #0D1A12; --none: #E08A72; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #141915; --surface: #1E2520; --ink: #E8EDE6; --muted: #9DAA9F; --line: #2E3830;
+  --accent: #4DB27A; --accent-ink: #0D1A12; --none: #E08A72; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 16px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 20px 40px;
+}
+.wrap { max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px; }
+header { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+h1 { font-family: var(--font-display); font-weight: 700; font-size: 1.7rem; margin: 0; text-wrap: balance; }
+.count { font-variant-numeric: tabular-nums; color: var(--muted); font-weight: 700; }
+.bar { height: 8px; background: var(--line); border-radius: 99px; overflow: hidden; }
+.bar > i { display: block; height: 100%; width: 0; background: var(--accent); border-radius: 99px; transition: width .3s; }
+.intro { color: var(--muted); margin: 0; line-height: 1.5; max-width: 62ch; }
+
+.stage { background: var(--surface); border: 1px solid var(--line); border-radius: 24px; padding: 18px; display: flex; flex-direction: column; gap: 14px; }
+.who { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.who h2 { font-family: var(--font-display); font-weight: 600; font-size: 1.6rem; margin: 0; }
+.chip { font-size: .8rem; font-weight: 700; letter-spacing: .03em; padding: 4px 10px; border-radius: 99px; color: var(--ink); background: color-mix(in srgb, var(--chip) 28%, transparent); }
+.pair { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.opt { position: relative; border: 3px solid transparent; border-radius: 20px; background: var(--bg); padding: 6px 6px 10px; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 4px; font: inherit; color: inherit; transition: border-color .15s, transform .15s; min-width: 0; }
+.opt:hover { border-color: var(--line); }
+.opt:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.opt.picked { border-color: var(--accent); transform: scale(.98); }
+.opt svg { width: 100%; height: auto; aspect-ratio: 1; display: block; }
+.opt .num { font-family: var(--font-display); font-weight: 600; font-size: 1.1rem; }
+.opt .badge { position: absolute; top: 10px; right: 10px; width: 30px; height: 30px; border-radius: 50%; background: var(--accent); color: var(--accent-ink); display: none; place-items: center; font-weight: 800; }
+.opt.picked .badge { display: grid; }
+.credit { font-size: .72rem; color: var(--muted); text-align: center; overflow-wrap: anywhere; }
+.actions { display: flex; gap: 10px; flex-wrap: wrap; justify-content: space-between; }
+.btn { font: inherit; font-weight: 700; border-radius: 99px; padding: 10px 18px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); cursor: pointer; }
+.btn:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.btn.none.on { border-color: var(--none); color: var(--none); }
+.btn:disabled { opacity: .4; cursor: default; }
+.hint { font-size: .85rem; color: var(--muted); margin: 0; }
+.save { font-size: .85rem; color: var(--muted); min-height: 1.2em; }
+
+.map { display: grid; grid-template-columns: repeat(auto-fill, minmax(112px, 1fr)); gap: 6px; }
+.cell { font: inherit; font-size: .82rem; text-align: left; display: flex; align-items: center; gap: 6px; padding: 6px 8px; border-radius: 10px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); cursor: pointer; min-width: 0; }
+.cell span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.cell.cur { border-color: var(--accent); }
+.dot { flex: none; width: 18px; height: 18px; border-radius: 50%; border: 2px solid var(--line); font-size: .68rem; font-weight: 800; display: grid; place-items: center; }
+.dot.A, .dot.B { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.dot.none { background: var(--none); border-color: var(--none); color: var(--accent-ink); }
+.done { background: var(--surface); border: 1px solid var(--line); border-radius: 24px; padding: 22px; display: flex; flex-direction: column; gap: 10px; }
+.done h2 { font-family: var(--font-display); margin: 0; }
+.done p { margin: 0; line-height: 1.5; }
+.empty { padding: 30px; text-align: center; color: var(--muted); }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+
+<div class="wrap">
+  <header>
+    <h1>Welches Foto passt besser?</h1>
+    <span class="count" id="count">0 von 0</span>
+  </header>
+  <div class="bar"><i id="bar"></i></div>
+  <p class="intro">Tippe auf das schönere Bild. Danach geht es automatisch zum nächsten Tier. Mit „Keins passt“ suche ich noch ein anderes Foto. Tastatur: <b>1</b>, <b>2</b>, <b>0</b> für keins, Pfeiltasten zum Blättern.</p>
+
+  <section class="stage" id="stage" aria-live="polite">
+    <div class="empty">Die Bilder werden geladen …</div>
+  </section>
+
+  <section class="done" id="done" hidden>
+    <h2>Fertig, alle Tiere sind ausgewählt</h2>
+    <p>Deine Auswahl ist gespeichert. Sag Claude im Chat einfach „Fotos sind ausgewählt“, dann werden sie in die App übernommen.</p>
+  </section>
+
+  <div class="save" id="save"></div>
+  <nav class="map" id="map" aria-label="Alle Tiere"></nav>
+</div>
+
+<script>
+const $ = (id) => document.getElementById(id);
+let items = [];
+let picks = {};          // id -> "A" | "B" | "none"
+let idx = 0;
+let db = null;
+let localOnly = false;
+let loadedOnce = false;
+const unsaved = {};      // picks whose write is still in flight, so a snapshot doesn't undo them
+function pendingLocal() { return { ...unsaved }; }
+
+function esc(s) { return String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c])); }
+
+/* Same geometry as the app (PopOutLayout): a circle, the animal clipped to the circle below its
+   centre line and free above it. Wide animals are drawn bigger and centred. */
+function popOut(src, w0, h0, tint, key) {
+  const W = 100, H = 100, d = 84;
+  const cx = (W - d) / 2, cy = H * 0.97 - d, mid = cy + d / 2;
+  const aspect = w0 / Math.max(h0, 1);
+  let x, y, w, h;
+  if (aspect > 1.25) {
+    h = Math.min(W / aspect, H * 0.9); w = h * aspect;
+    const bottom = Math.min(cy + d - d * 0.05, mid - d * 0.06 + h / 2);
+    x = (W - w) / 2; y = bottom - h;
+  } else {
+    const s = Math.min(W * 0.92 / w0, H * 0.95 / h0);
+    w = w0 * s; h = h0 * s; x = (W - w) / 2; y = cy + d - d * 0.05 - h;
+  }
+  const id = "c" + key;
+  return `<svg viewBox="0 0 100 100" role="img" aria-hidden="true">
+    <defs><clipPath id="${id}"><circle cx="50" cy="${mid}" r="${d / 2}"/><rect x="0" y="0" width="100" height="${mid}"/></clipPath></defs>
+    <circle cx="50" cy="${mid}" r="${d / 2}" fill="${esc(tint)}" fill-opacity=".28"/>
+    <image href="${esc(src)}" x="${x}" y="${y}" width="${w}" height="${h}" clip-path="url(#${id})" preserveAspectRatio="xMidYMid meet"/>
+  </svg>`;
+}
+
+function render() {
+  const done = items.filter(it => picks[it.id]).length;
+  $("count").textContent = `${done} von ${items.length}`;
+  $("bar").style.width = items.length ? (100 * done / items.length) + "%" : "0";
+  $("done").hidden = !(items.length && done === items.length);
+
+  const it = items[idx];
+  if (!it) return;
+  const p = picks[it.id];
+  const opt = (k, v) => `
+    <button class="opt ${p === k ? "picked" : ""}" id="opt-${k}" data-k="${k}" aria-pressed="${p === k}" aria-label="Bild ${k === "A" ? 1 : 2} für ${esc(it.name)}">
+      ${popOut(v.src, v.w, v.h, it.color, it.id + k)}
+      <span class="badge">✓</span>
+      <span class="num">${k === "A" ? "1" : "2"}${k === "A" ? " · jetzt in der App" : ""}</span>
+      <span class="credit">${esc(v.credit)}</span>
+    </button>`;
+  $("stage").innerHTML = `
+    <div class="who"><h2>${esc(it.name)}</h2><span class="chip" style="--chip:${esc(it.color)}">${esc(it.category)}</span></div>
+    <div class="pair">${opt("A", it.a)}${opt("B", it.b)}</div>
+    <div class="actions">
+      <button class="btn" id="prev" ${idx === 0 ? "disabled" : ""}>Zurück</button>
+      <button class="btn none ${p === "none" ? "on" : ""}" id="none">Keins passt</button>
+      <button class="btn" id="next" ${idx >= items.length - 1 ? "disabled" : ""}>Weiter</button>
+    </div>`;
+  $("stage").querySelectorAll(".opt").forEach(b => b.addEventListener("click", () => choose(b.dataset.k)));
+  $("prev").addEventListener("click", () => go(idx - 1));
+  $("next").addEventListener("click", () => go(idx + 1));
+  $("none").addEventListener("click", () => choose("none"));
+
+  $("map").innerHTML = items.map((m, i) => {
+    const v = picks[m.id];
+    const label = v === "A" ? "1" : v === "B" ? "2" : v === "none" ? "–" : "";
+    return `<button class="cell ${i === idx ? "cur" : ""}" data-i="${i}"><i class="dot ${v || ""}">${label}</i><span>${esc(m.name)}</span></button>`;
+  }).join("");
+  $("map").querySelectorAll(".cell").forEach(c => c.addEventListener("click", () => go(+c.dataset.i)));
+}
+
+function go(i) { idx = Math.max(0, Math.min(items.length - 1, i)); render(); }
+
+async function choose(k) {
+  const it = items[idx];
+  picks[it.id] = k;
+  render();
+  await persist(it.id, k);
+  const nextOpen = items.findIndex((m, i) => i > idx && !picks[m.id]);
+  setTimeout(() => go(nextOpen >= 0 ? nextOpen : Math.min(idx + 1, items.length - 1)), 280);
+}
+
+async function persist(id, k) {
+  if (db) {
+    unsaved[id] = k;
+    try {
+      await db.collection("choices").doc(id).set({ pick: k, at: Date.now() });
+      delete unsaved[id];
+      $("save").textContent = "Gespeichert.";
+    } catch (e) {
+      $("save").textContent = "Speichern hat nicht geklappt. Deine Auswahl bleibt auf dieser Seite, versuch es gleich nochmal.";
+    }
+  } else {
+    try { localStorage.setItem("tierton-picks", JSON.stringify(picks)); } catch (e) {}
+    $("save").textContent = localOnly ? "Nur auf diesem Gerät gespeichert. Schick Claude am Ende die Liste unten." : "";
+  }
+}
+
+document.addEventListener("keydown", (e) => {
+  if (e.target.closest && e.target.closest("input,textarea")) return;
+  if (e.key === "1") choose("A");
+  else if (e.key === "2") choose("B");
+  else if (e.key === "0") choose("none");
+  else if (e.key === "ArrowRight") go(idx + 1);
+  else if (e.key === "ArrowLeft") go(idx - 1);
+});
+
+async function boot() {
+  try {
+    items = await (await fetch("choices.json")).json();
+  } catch (e) {
+    $("stage").innerHTML = '<div class="empty">Die Bilderliste konnte nicht geladen werden. Lade die Seite neu.</div>';
+    return;
+  }
+  render();
+
+  const timer = setTimeout(() => { if (!db) { localOnly = true; $("save").textContent = "Auswahl wird nur auf diesem Gerät gespeichert."; } }, 10000);
+  db = await (window.claude?.use ? window.claude.use("db") : Promise.resolve(null));
+  clearTimeout(timer);
+  if (!db) {
+    localOnly = true;
+    try { picks = JSON.parse(localStorage.getItem("tierton-picks") || "{}"); } catch (e) {}
+    $("save").textContent = "Auswahl wird nur auf diesem Gerät gespeichert.";
+    render();
+    return;
+  }
+  db.collection("choices").onSnapshot((snap) => {
+    const fresh = {};
+    snap.docs.forEach(d => { const v = d.data(); if (v && ["A", "B", "none"].includes(v.pick)) fresh[d.id] = v.pick; });
+    picks = Object.assign(fresh, pendingLocal());
+    if (!loadedOnce) {
+      loadedOnce = true;
+      const first = items.findIndex(m => !picks[m.id]);
+      if (first >= 0) idx = first;
+    }
+    render();
+  }, () => { $("save").textContent = "Gespeicherte Auswahl konnte nicht geladen werden."; });
+}
+boot();
+</script>

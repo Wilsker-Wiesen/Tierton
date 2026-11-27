@@ -1,0 +1,11 @@
+{
+  "name": "Tierton",
+  "short_name": "Tierton",
+  "description": "Tierstimmen entdecken und raten",
+  "lang": "de",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#F2F2F7",
+  "theme_color": "#2E8B57",
+  "icons": [{ "src": "icon.png", "sizes": "512x512", "type": "image/png" }]
+}
