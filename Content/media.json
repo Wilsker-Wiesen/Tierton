@@ -151,11 +151,11 @@
   },
   "biber": {
     "image": {
-      "title": "File:Bäver närbild.jpg",
-      "artist": "Tjustorparn",
-      "license": "CC BY-SA 4.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
-      "page": "https://commons.wikimedia.org/wiki/File%3AB%C3%A4ver_n%C3%A4rbild.jpg",
+      "title": "File:American Beaver.jpg",
+      "artist": "Steve from Washington, DC, USA",
+      "license": "CC BY-SA 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+      "page": "https://commons.wikimedia.org/wiki/File%3AAmerican_Beaver.jpg",
       "edited": "freigestellt"
     },
     "iucn": "LC",
@@ -1239,11 +1239,11 @@
   },
   "pottwal": {
     "image": {
-      "title": "File:0b4a8510 by vitaly sokol-dbw6sol.jpg",
-      "artist": "Will Falcon aka Vitaly Sokol",
-      "license": "CC BY 4.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
-      "page": "https://commons.wikimedia.org/wiki/File%3A0b4a8510_by_vitaly_sokol-dbw6sol.jpg",
+      "title": "File:Mother and baby sperm whale.jpg",
+      "artist": "Gabriel Barathieu",
+      "license": "CC BY-SA 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+      "page": "https://commons.wikimedia.org/wiki/File%3AMother_and_baby_sperm_whale.jpg",
       "edited": "freigestellt"
     },
     "iucn": "VU",
@@ -1401,12 +1401,12 @@
   },
   "schwein": {
     "image": {
-      "title": "File:Pot-bellied pigs in Lisbon Zoo 2008.jpg",
-      "artist": "Alvesgaspar",
-      "license": "CC BY-SA 4.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
-      "page": "https://commons.wikimedia.org/wiki/File%3APot-bellied_pigs_in_Lisbon_Zoo_2008.jpg",
-      "edited": "freigestellt"
+      "title": "File:Show Pig (18097041013).jpg",
+      "artist": "Rictor Norton  & David Allen from London, United Kingdom",
+      "license": "CC BY 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+      "page": "https://commons.wikimedia.org/wiki/File%3AShow_Pig_%2818097041013%29.jpg",
+      "edited": "freigestellt, Rand weich ausgeblendet"
     },
     "iucn": null,
     "wikidata": "Q787",
@@ -1639,7 +1639,7 @@
       "license": "Public domain",
       "licenseUrl": "",
       "page": "https://commons.wikimedia.org/wiki/File%3APacific_Walrus_-_Bull_%288247646168%29.jpg",
-      "edited": "freigestellt"
+      "edited": "freigestellt, unten begradigt"
     },
     "iucn": "VU",
     "wikidata": "Q40994",
@@ -1665,11 +1665,11 @@
   },
   "wildhund": {
     "image": {
-      "title": "File:African wild dog (Lycaon pictus pictus) head.jpg",
-      "artist": "Charles J. Sharp",
+      "title": "File:African Wild Dog at Working with Wildlife.jpg",
+      "artist": "AfricanConservation",
       "license": "CC BY-SA 4.0",
       "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
-      "page": "https://commons.wikimedia.org/wiki/File%3AAfrican_wild_dog_%28Lycaon_pictus_pictus%29_head.jpg",
+      "page": "https://commons.wikimedia.org/wiki/File%3AAfrican_Wild_Dog_at_Working_with_Wildlife.jpg",
       "edited": "freigestellt"
     },
     "iucn": null,
@@ -1991,11 +1991,11 @@
   },
   "taube": {
     "image": {
-      "title": "File:Rock doves in flight.jpg",
-      "artist": "Laitche",
+      "title": "File:Common pigeon at Waterlow Park, London 01.jpg",
+      "artist": "Satdeep Gill",
       "license": "CC BY-SA 4.0",
       "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
-      "page": "https://commons.wikimedia.org/wiki/File%3ARock_doves_in_flight.jpg",
+      "page": "https://commons.wikimedia.org/wiki/File%3ACommon_pigeon_at_Waterlow_Park%2C_London_01.jpg",
       "edited": "freigestellt"
     },
     "iucn": null,

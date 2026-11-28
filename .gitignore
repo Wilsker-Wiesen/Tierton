@@ -12,3 +12,5 @@ tools/photo-choice/img/
 tools/photo-choice/choices.json
 tools/missing_sound_candidates.json
 tools/sound_qa*.txt
+tools/photo-choice-2/img/
+tools/photo-choice-2/choices.json
