@@ -1,7 +1,7 @@
 import SwiftUI
 
 /// Guessing game for two (or more): one person plays a sound – chosen at random or picked
-/// secretly – and the others guess. Then the animal is revealed.
+/// secretly – and sees the animal; the others only hear it and guess.
 struct TogetherView: View {
     @Environment(AnimalStore.self) private var store
     @Environment(SoundPlayer.self) private var player
@@ -62,7 +62,7 @@ struct TogetherView: View {
                     Image(systemName: "questionmark.bubble.fill")
                         .font(.system(size: 80))
                         .foregroundStyle(Color(hex: "#C0603A"))
-                    Text("Drück den Knopf, ein zufälliges Tier ist zu hören. Die anderen raten!")
+                    Text("Drück den Knopf: Du siehst ein zufälliges Tier und spielst sein Geräusch ab. Die anderen raten!")
                         .font(.title3)
                         .multilineTextAlignment(.center)
                         .padding(.horizontal, 32)
@@ -94,28 +94,45 @@ struct TogetherView: View {
         }
     }
 
-    // MARK: Hidden
+    // MARK: Playing (the person asking sees the animal, the others only hear it)
 
     private func hidden(_ a: Animal) -> some View {
-        VStack(spacing: 24) {
-            Spacer()
-            ZStack {
-                Circle().fill(Color(hex: "#C0603A").opacity(0.15)).frame(width: 220, height: 220)
-                Image(systemName: player.playingID == a.id ? "speaker.wave.3.fill" : "questionmark")
-                    .font(.system(size: 90, weight: .heavy))
-                    .foregroundStyle(Color(hex: "#C0603A"))
-                    .symbolEffect(.variableColor.iterative, isActive: player.playingID == a.id)
-                    .contentTransition(.symbolEffect(.replace))
+        let playing = player.playingID == a.id
+        let c = store.category(of: a)
+        return VStack(spacing: 14) {
+            Label("Nur du siehst das Tier – die anderen raten!", systemImage: "eye.fill")
+                .font(.subheadline.weight(.semibold))
+                .foregroundStyle(.secondary)
+                .padding(.top, 8)
+            Button { player.toggle(a, from: store) } label: {
+                AnimalPhoto(animal: a, circleOpacity: playing ? 0.5 : 0.32)
+                    .aspectRatio(1, contentMode: .fit)
+                    .frame(maxWidth: 400, maxHeight: 380)
+                    .overlay(alignment: .bottomTrailing) {
+                        Image(systemName: playing ? "speaker.wave.3.fill" : "play.fill")
+                            .font(.title2.bold())
+                            .foregroundStyle(.white)
+                            .symbolEffect(.variableColor.iterative, isActive: playing)
+                            .frame(width: 58, height: 58)
+                            .background(c?.tint ?? Color(hex: "#C0603A"), in: Circle())
+                            .shadow(radius: 5)
+                    }
             }
-            Text("Welches Tier ist das?")
-                .font(.largeTitle.bold())
+            .buttonStyle(.plain)
+            .padding(.horizontal)
+            .accessibilityLabel("\(a.name), Geräusch abspielen")
+            Text(a.name).font(.largeTitle.bold())
+            if let c {
+                Label(c.name, systemImage: c.symbol).foregroundStyle(c.tint).font(.headline)
+            }
+            Button { detail = a } label: { Label("Mehr über das Tier", systemImage: "info.circle.fill") }
             Spacer()
             HStack(spacing: 12) {
                 BigButton(title: "Nochmal", symbol: "arrow.counterclockwise", color: .gray) {
                     player.play(a, from: store)
                 }
-                BigButton(title: "Auflösen", symbol: "eye.fill", color: Color(hex: "#C0603A")) {
-                    phase = .revealed(a)
+                BigButton(title: "Nächstes Tier", symbol: "forward.fill", color: Color(hex: "#C0603A")) {
+                    if source == .random { startRandom() } else { player.stop(); phase = .setup }
                 }
             }
             .padding(.horizontal)

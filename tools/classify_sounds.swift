@@ -36,7 +36,15 @@ for f in files {
         try analyzer.add(req, withObserver: col)
         analyzer.analyze()
         let top = col.scores.sorted { $0.value > $1.value }.prefix(5)
-        let flags = col.scores.filter { bad.contains($0.key) && $0.value > 0.5 }.map { $0.key }
+        var flags = col.scores.filter { bad.contains($0.key) && $0.value > 0.5 }.map { $0.key }
+        // an animal must be recognisable among the strongest classes
+        let animalWords = ["dog", "cat", "horse", "cow", "pig", "sheep", "goat", "fowl", "chicken", "rooster", "turkey",
+                           "duck", "goose", "bird", "pigeon", "crow", "owl", "lion", "roar", "whale", "frog", "snake",
+                           "insect", "cricket", "bee", "fly_", "mosquito", "elk", "coyote", "wolf", "howl", "bark",
+                           "growl", "purr", "meow", "bleat", "moo", "oink", "neigh", "squawk", "chirp", "gobble",
+                           "honk", "rodent", "mouse", "animal", "livestock", "hiss", "burp", "snoring"]
+        let strong = col.scores.sorted { $0.value > $1.value }.prefix(8).filter { $0.value > 0.4 }
+        if !strong.contains(where: { s in animalWords.contains(where: { s.key.contains($0) }) }) { flags.append("no_animal") }
         print("\(id)\t\(flags.isEmpty ? "ok  " : "WARN")\t" + top.map { "\($0.key) \(Int($0.value * 100))" }.joined(separator: ", ")
               + (flags.isEmpty ? "" : "\t!! \(flags.joined(separator: ","))"))
     } catch {

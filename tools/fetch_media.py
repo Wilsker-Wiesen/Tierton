@@ -241,6 +241,41 @@ def resolve():
     print("no sound:", missing_s)
     print("no image:", missing_i)
 
+# skip leading silence, max 14 s, cut rumble, FFT denoise, loudness-normalise,
+# soft noise gate between calls, short fades
+SOUND_FILTER = ("silenceremove=start_periods=1:start_threshold=-45dB:start_silence=0.1,"
+                "atrim=0:14,highpass=f=70,afftdn=nr=24:nf=-35:tn=1,loudnorm=I=-16:TP=-1.5:LRA=11,"
+                "agate=threshold=0.03:ratio=3:range=0.06:attack=10:release=250,"
+                "afade=t=in:d=0.05,areverse,afade=t=in:d=0.6,areverse")
+
+
+def reprocess(only=None):
+    """Rebuilds every existing Media/<id>.m4a from its cached original with SOUND_FILTER (no downloads)."""
+    import glob
+    for m4a in sorted(glob.glob(os.path.join(OUT_DIR, "*.m4a"))):
+        aid = os.path.basename(m4a)[:-4]
+        if only and aid not in only: continue
+        raws = sorted(glob.glob(os.path.join(CACHE, "raw", aid + "_snd*")), key=os.path.getmtime, reverse=True)
+        raw = next((r for r in raws if subprocess.run(["ffprobe", "-v", "error", "-select_streams", "a", "-show_entries",
+                     "stream=codec_type", "-of", "csv=p=0", r], capture_output=True, text=True).stdout.strip()), None)
+        if not raw:
+            print(f"{aid:16} no cached original, kept"); continue
+        tmp = m4a + ".tmp.m4a"
+        try:
+            run(["ffmpeg", "-y", "-loglevel", "error", "-i", raw, "-vn", "-ac", "1", "-ar", "44100",
+                 "-af", SOUND_FILTER, "-c:a", "aac", "-b:a", "80k", tmp])
+            dur = subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", tmp],
+                                 capture_output=True, text=True).stdout.strip()
+            if not dur or float(dur) < 0.3:
+                run(["ffmpeg", "-y", "-loglevel", "error", "-i", raw, "-vn", "-ac", "1", "-ar", "44100",
+                     "-af", SOUND_FILTER.split(",", 1)[1], "-c:a", "aac", "-b:a", "80k", tmp])
+            os.replace(tmp, m4a)
+            print(f"{aid:16} ok", flush=True)
+        except Exception as e:
+            print(f"{aid:16} FAILED {str(e)[:100]}")
+            if os.path.exists(tmp): os.remove(tmp)
+
+
 def run(cmd):
     p = subprocess.run(cmd, capture_output=True, text=True)
     if p.returncode != 0:
@@ -304,9 +339,7 @@ def fetch_sound(aid, snd, entry):
                     raw = os.path.join(CACHE, "raw", f"{aid}_snd_orig{ext}")
                     open(raw, "wb").write(get(snd["url"], binary=True))
                 # skip leading silence, max 14 s, loudness-normalise, short fades, mono AAC
-                af = ("silenceremove=start_periods=1:start_threshold=-45dB:start_silence=0.1,"
-                      "atrim=0:14,loudnorm=I=-16:TP=-1.5:LRA=11,afade=t=in:d=0.05,"
-                      "areverse,afade=t=in:d=0.6,areverse")
+                af = SOUND_FILTER
                 run(["ffmpeg", "-y", "-loglevel", "error", "-i", raw, "-vn", "-ac", "1", "-ar", "44100",
                      "-af", af, "-c:a", "aac", "-b:a", "80k", dst])
                 dur = subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", dst],
@@ -496,3 +529,4 @@ if __name__ == "__main__":
     if cmd in ("images", "all"): images(set(sys.argv[2:]) or None)
     if cmd == "crawlsounds": sounds_from_crawl()
     if cmd == "altimages": images_alt(sys.argv[2:])
+    if cmd == "reprocess": reprocess(set(sys.argv[2:]) or None)

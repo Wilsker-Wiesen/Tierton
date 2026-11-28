@@ -36,7 +36,8 @@ func cutout(_ url: URL) throws -> (CGImage, Double)? {
     var area = [Int: Int]()
     for y in 0..<h { for x in 0..<w { let v = Int(base[y * rb + x]); if v > 0 { area[v, default: 0] += 1 } } }
     let biggest = area.values.max() ?? 0
-    var keep = IndexSet(area.filter { Double($0.value) >= 0.35 * Double(biggest) }.map(\.key))
+    let keepFrac = Double(ProcessInfo.processInfo.environment["CUTOUT_KEEP"] ?? "0.35") ?? 0.35
+    var keep = IndexSet(area.filter { Double($0.value) >= keepFrac * Double(biggest) }.map(\.key))
     if keep.isEmpty { keep = obs.allInstances }
     // Which photo borders does the kept animal touch? (top/left/right = animal is cut off)
     var edges = Set<Character>()
